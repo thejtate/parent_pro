@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Custom mobile site functionality
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function parentpro_mobile_custom_block_info() {
+  $blocks = array();
+
+  $blocks['pmc_homepage_menu_block'] = array(
+    'info' => t('Parentpro mobile custom: Homepage menu block'),
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function parentpro_mobile_custom_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'pmc_homepage_menu_block':
+      $left_homepage_menu_tree = menu_tree_all_data('menu-mobile-homepage-left-menu');
+      $left_homepage_menu = menu_tree_output($left_homepage_menu_tree);
+      $right_homepage_menu_tree = menu_tree_all_data('menu-mobile-homepage-right-menu');
+      $right_homepage_menu = menu_tree_output($right_homepage_menu_tree);
+
+      $block['subject'] = "";
+      $block['content'] = theme("pmc_homepage_menu_block", array(
+        "left" => $left_homepage_menu,
+        "right" => $right_homepage_menu
+      ));
+      break;
+
+    //hook_block_view_item
+
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implementation of hook_theme()
+ */
+function parentpro_mobile_custom_theme() {
+  $path = drupal_get_path("module", "parentpro_mobile_custom");
+  return array(
+    'pmc_homepage_menu_block' => array(
+      'variables' => array(
+        'left' => NULL,
+        'right' => NULL,
+      ),
+      'template' => 'pmc-homepage-menu-content',
+      'path' => $path . '/templates',
+    ),
+  );
+}

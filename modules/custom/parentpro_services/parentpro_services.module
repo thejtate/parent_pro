@@ -1,0 +1,247 @@
+<?php
+/**
+ * @file
+ * Parentpro Services
+ */
+define('PARENTPRO_SERVICES_NAMES_DELIMITER', ";\n");
+
+/**
+ * Implements hook_menu().
+ */
+function parentpro_services_menu() {
+  $items = array();
+
+  $items['node/%parentpro_services_node/services'] = array(
+    'title' => 'Edit services',
+    'page callback' => 'parentpro_services_edit_page',
+    'page arguments' => array(1),
+    'access callback' => 'node_access',
+    'access arguments' => array('update', 1),
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+  );
+
+  return $items;
+}
+
+/**
+ * Node load callback.
+ */
+function parentpro_services_node_load($nid) {
+  if (!is_numeric($nid)) {
+    return FALSE;
+  }
+  $node = node_load($nid);
+  if (!isset($node->type) || !variable_get('webform_node_' . $node->type, FALSE) || $node->type !== 'webform_services') {
+    return FALSE;
+  }
+  return $node;
+}
+
+/**
+ * Page callback
+ */
+function parentpro_services_edit_page($node) {
+  $elements = node_view($node, 'teaser');
+  return drupal_render($elements);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function parentpro_services_form_alter(&$form, &$form_state, $form_id) {
+
+  if($form_id == 'webform_services_node_form') {
+    $form['field_webform_services']['#access'] = FALSE;
+
+  } else if($form_id == 'webform_client_form_' . SERVICES_QUESTIONAIRE_NEW_WEBFORM_NID) {
+
+    module_load_include('inc', 'parentpro_services', 'includes/prentpro_services.helpers');
+
+    array_unshift($form['#submit'], 'parentpro_services_submit');
+
+   $form['submitted']['services']['#access'] = FALSE;
+
+    if(!empty($_GET['county'])) {
+      $services = parentpro_services_views_retrieve('county_services', 'default', array(), array($_GET['county']));
+    } else {
+      $form['submitted']['#access'] = FALSE;
+      $form['actions']['#access'] = FALSE;
+      $form['notification'] = array(
+        '#markup' => '<h3>' . t('Please choose your county on the services map.') . '</h3>',
+      );
+      $form['notification']['#markup'] .= '<div class="btn-wrap">' . l(t('Go to the Services page'), 'node/' . WEBFORM_SERVICES_MAP_NID, array('attributes' => array('class' => array('btn')))) . '</div>';
+    }
+
+    $has_high_stess_requirements = FALSE;
+    $has_native_american_requirements= FALSE;
+    $other_requirements_keys = array();
+    $other_requirements_options = array();
+    $form['submitted']['please_check_any_of_the_following_questions_if_true']['#access'] = FALSE;
+
+    if(!empty($services)) {
+
+      $available_other_requirements_options = parentpro_services_get_other_requirements_options();
+
+      foreach ($services as &$service) {
+        if(!$has_high_stess_requirements && !empty($service->high_stress)) {
+          $has_high_stess_requirements = TRUE;
+        }
+
+        if(!$has_native_american_requirements && !empty($service->native_american_child)) {
+          $has_native_american_requirements = TRUE;
+        }
+        if(!empty($service->other)) {
+          $service->other = explode(', ', $service->other);
+          $other_requirements_keys = array_unique(array_merge($other_requirements_keys, $service->other));
+        }
+
+      }
+
+      if(!empty($other_requirements_keys)) {
+        foreach ($other_requirements_keys as $key) {
+          $other_requirements_options[$key] = $available_other_requirements_options[$key];
+        }
+
+        $form['submitted']['please_check_any_of_the_following_questions_if_true']['#options'] = $other_requirements_options;
+        $form['submitted']['please_check_any_of_the_following_questions_if_true']['#access'] = TRUE;
+      }
+
+      $form_state['parentpro_services'] = $services;
+    }
+    //show or hide fields if county has requirements for some services.
+    //$form['submitted']['please_check_any_of_the_following_questions_if_true']['#access'] = !empty($other_requirements_options);
+    $form['submitted']['rank_the_level_of_stress_in_your_home']['#access'] = $has_high_stess_requirements;
+    $form['submitted']['is_your_child_native_american']['#access'] = $has_native_american_requirements;
+  }
+}
+
+/**
+ * Additional custom webform submit.
+ */
+function parentpro_services_submit(&$form, &$form_state) {
+
+  $submitted = $form_state['values']['submitted'];
+  $fit_services_names = array();
+//  dsm($form_state['parentpro_services']);
+//  dsm($submitted);
+  if(!empty($form_state['parentpro_services'])) {
+    foreach ($form_state['parentpro_services'] as $service) {
+
+      //check family describes requirement
+      $familty_describes_key = $submitted['tell_us_about_your_family_choose_the_one_that_best_describes_your_family'];
+      if($service->{$familty_describes_key} !== 'no') {
+
+        //check pass or no for all other requirements
+
+        $pass_en_language = empty($service->language_english)
+          || ($service->language_english == 'yes' && $submitted['language_preference_for_services'] == 'english')
+          || ($service->language_english == 'no' && $submitted['language_preference_for_services'] !== 'english');
+
+        $pass_es_language = empty($service->language_spanish)
+          || ($service->language_spanish == 'yes' && $submitted['language_preference_for_services'] == 'spanish')
+          || ($service->language_spanish == 'no' && $submitted['language_preference_for_services'] !== 'spanish');
+
+        $pass_wic_or_soonercare = empty($service->wic_or_soonercare)
+          || ($service->wic_or_soonercare == 'yes' && $submitted['are_you_eligible_for_wic_and_or_medicaid'] == 'yes')
+          || ($service->wic_or_soonercare == 'no' && $submitted['are_you_eligible_for_wic_and_or_medicaid'] == 'no');
+
+        $pass_native_child = empty($service->native_american_child)
+          || ($service->native_american_child == 'yes' && $submitted['is_your_child_native_american'] == 'yes')
+          || ($service->native_american_child == 'no' && $submitted['is_your_child_native_american'] == 'no');
+
+        $pass_high_stress = empty($service->high_stress)
+          || ($service->high_stress == 'yes' && $submitted['rank_the_level_of_stress_in_your_home'] == 'high')
+          || ($service->high_stress == 'yes' && $submitted['rank_the_level_of_stress_in_your_home'] == 'moderate')
+          || ($service->high_stress == 'no' && $submitted['rank_the_level_of_stress_in_your_home'] == 'no');
+
+        $pass_other_questions = empty($service->other) || parentpro_services_is_selected_all_other_questions($service->other, $submitted['please_check_any_of_the_following_questions_if_true']);
+  //      dsm(array(
+  //        '$pass_en_language' => $pass_en_language,
+  //        '$pass_es_language' => $pass_es_language,
+  //        '$pass_wic_or_soonercare' => $pass_wic_or_soonercare,
+  //        '$pass_native_child' => $pass_native_child,
+  //        '$pass_high_stress' => $pass_high_stress,
+  //        '$pass_other_questions' => $pass_other_questions,
+  //      ), $service->program_name);
+        if ($pass_en_language
+          && $pass_es_language
+          && $pass_wic_or_soonercare
+          && $pass_native_child
+          && $pass_high_stress
+          && $pass_other_questions
+        ) {
+          $fit_services_names[] = $service->program_name;
+        }
+      }
+
+  //    dsm($fit_services_names);
+      $form_state['values']['submitted']['services'] = implode(
+        PARENTPRO_SERVICES_NAMES_DELIMITER, $fit_services_names);
+    }
+  }
+
+
+}
+
+/**
+ * Get options from node field settings.
+ */
+function parentpro_services_get_other_requirements_options() {
+
+  $field_info = field_info_field('field_ws_require_other');
+
+  return !empty($field_info['settings']['allowed_values']) ? $field_info['settings']['allowed_values'] : array();
+}
+
+/**
+ * Check if all required keys selected.
+ *
+ * @param $requirement_keys
+ * @param $selected_options
+ * @return bool
+ */
+function parentpro_services_is_selected_all_other_questions($requirement_keys, $selected_options) {
+
+  $result = !empty($selected_options) ? TRUE : FALSE;
+  foreach ($requirement_keys as $req_key) {
+    if(empty($selected_options[$req_key])) {
+      $result = FALSE;
+      break;
+    }
+  }
+
+  return $result;
+}
+
+/**
+ * Implements hook_preprocess_webform_confirmation()
+ */
+function parentpro_services_preprocess_webform_confirmation(&$vars) {
+
+  if($vars['node']->nid == SERVICES_QUESTIONAIRE_WEBFORM_NID || $vars['node']->nid == SERVICES_QUESTIONAIRE_NEW_WEBFORM_NID) {
+
+    module_load_include('inc', 'webform', 'includes/webform.submissions');
+    $sid = isset($vars['sid']) ? $vars['sid'] : '';
+    $submission = webform_get_submission($vars['node']->nid, $sid);
+    $county = !empty($submission->data[PARENTPRO_WEBFORM_SERVICES_COUNTY_CID][0]) ?
+      $submission->data[PARENTPRO_WEBFORM_SERVICES_COUNTY_CID][0] : '';
+
+    $services_names = !empty($submission->data[PARENTPRO_WEBFORM_SERVICES_NAMES_CID][0]) ?
+      $submission->data[PARENTPRO_WEBFORM_SERVICES_NAMES_CID][0] : '';
+
+    if(!empty($services_names)) {
+      $message_with_tokens = webform_replace_tokens($vars['node']->field_webform_services_positive[LANGUAGE_NONE][0]['value'], $vars['node'], $submission);
+      $vars['confirmation_message'] = check_markup($message_with_tokens, 'full_html');
+      $vars['wrapper_classes'] = '';
+    } else {
+      $vars['confirmation_message'] = check_markup($vars['node']->field_webform_services_negative[LANGUAGE_NONE][0]['value'], 'full_html');
+      $vars['wrapper_classes'] = '';
+    }
+
+    if ($county) {
+      $vars['back_button'] = '' . l(t('Back to your county'), 'counties-new/'. $county, array('attributes' => array('class' => array('btn'))));
+    }
+  }
+}

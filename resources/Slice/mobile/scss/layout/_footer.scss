@@ -1,0 +1,30 @@
+.footer {
+
+  .img-decor {
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.footer-inner {
+  display: table;
+  width: 100%;
+
+  .item {
+    width: 50%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 6% 10% 6% 0;
+
+    &:first-child {
+      padding: 7% 10%;
+    }
+
+    img {
+      display: block;
+    }
+  }
+}

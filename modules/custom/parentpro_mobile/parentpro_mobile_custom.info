@@ -1,0 +1,4 @@
+name = ParentPro mobile custom
+description = Custom mobile ParentPro module.
+core = 7.x
+package = custom

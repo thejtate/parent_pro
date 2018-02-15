@@ -1,0 +1,263 @@
+/* Base configs */
+.field-collection-view {
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+}
+
+.field-collection-container {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.tabs {
+  position: absolute;
+  z-index: 999;
+}
+
+/* End of configs */
+/* Main menu */
+.header-inner li a.active {
+  color: #fff;
+}
+
+/* About page */
+.page-about-us .media-youtube-player {
+  width: 540px;
+}
+
+.page.page-activities .content-top .navigation > ul > li img {
+  height: auto;
+}
+
+/* Calendar */
+.page-calendar .fancybox-skin {
+  border: none;
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.view-events-calendar div.view-empty {
+  font-size: 19px;
+}
+
+.page.page-calendar .calendar-content .calendar-item .part-left span {
+  width: 32px;
+  height: 32px;
+}
+
+.page.page-calendar .calendar-content .day {
+  float: none;
+  text-align: left;
+  padding: 0;
+}
+
+.calendar-calendar td .inner div.calendar .btn-wrap .btn {
+  padding: 7px 20px;
+  font-size: 12px;
+  border: 1px solid #b383b1;
+  color: #b383b1;
+
+}
+
+.calendar-calendar .month-view .full td .inner div.calendar.monthview div a.btn:hover {
+  background: #b383b1;
+  color: #fff;
+  text-decoration: none;
+}
+
+.calendar-calendar .month-view .full td.single-day div.monthview {
+  background: none;
+}
+
+.calendar-calendar .inner p {
+  padding: 0;
+  color: #cca9cb;
+}
+
+.map-wrapper .desc tr.even, .map-wrapper .desc tr.odd {
+  background: none;
+  border-bottom: none;
+  padding: 0;
+}
+
+.calendar-calendar .today {
+  border-color: #68ad45 !important;
+}
+
+.content-wrapper .cols.cols-three.style-b h5 {
+  border-top: 2px dotted #cccccc;
+  padding-top: 10px;
+}
+
+.content-wrapper .cols.cols-three.style-b .col-hd + h5 {
+  border-top: none;
+  padding-top: 0;
+}
+
+.map-wrapper h4 + p {
+  font-size: 24px;
+}
+
+.content-wrapper .map-wrapper .desc a:hover {
+  text-decoration: underline;
+}
+
+.cols-two.style-b p img {
+  max-width: 128px;
+  height: auto;
+  padding: 0 6px;
+}
+
+.page-user .content-wrapper {
+  width: 800px;
+  margin: 40px auto;
+}
+
+.page-user .content-wrapper .tabs {
+  position: relative;
+}
+
+.page-user.not-logged-in .content-wrapper .tabs {
+  display: none;
+}
+
+.services-icons {
+  text-align: center;
+}
+
+.parenting-information h3 {
+  width: 400px;
+}
+
+.node-webform .form.form-call .links a {
+  color: #68ad45;
+}
+
+span.link {
+  position: relative;
+  margin-bottom: 15px;
+  padding-left: 15px;
+}
+
+span.link a {
+  text-decoration: none;
+  color: #923f8c;
+}
+
+span.link:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 9px solid #91d96c;
+}
+
+.content-wrapper .top-img .desc p {
+  color: #68ad45;
+  text-transform: uppercase;
+  font-size: 19px;
+  line-height: 30px;
+  letter-spacing: 1px;
+  font-family: "titilliumtext22lxbold";
+}
+
+.mini.has-events.past > div > a {
+  pointer-events: none;
+  cursor: default;
+}
+
+.view-events-calendar .views-exposed-form .views-exposed-widget {
+  float: none;
+  padding: 0;
+}
+
+.page-calendar .views-widget-filter-field_event_city_tid {
+  display: none;
+}
+
+.page-calendar .form.form-month.form-events {
+  margin-left: 10px;
+}
+
+.node-event .text a{
+  color: #808080;
+}
+
+/* Service */
+.page-services .map .view-footer p {
+  text-align: left;
+}
+
+.page-services .map .view-footer a {
+  color: #808080;
+  text-decoration: none;
+  border-bottom: 1px dotted;
+}
+
+.page-services .map .view-footer a:hover {
+  border-bottom: none;
+}
+
+/* Services Questionaire */
+.form.form-services .webform-component--services .form-type-checkbox {
+  pointer-events: none;
+  display: block;
+}
+.form.form-services .webform-component--services .form-type-checkbox label {
+  display:none;
+}
+
+.form.form-services .webform-component--services .form-type-checkbox input:checked + label {
+  display:block;
+}
+.form.form-services .webform-component--services .form-type-checkbox label:before {
+  display: none;
+}
+/* END Services Questionaire */
+
+.webform-confirmation .btn-wrap.style-a .btn {
+  float: none;
+}
+
+.page-services-questionaire .form.form-services fieldset:nth-child(1) .form-type-checkbox {
+  min-width: 429px;
+}
+
+.content .field-name-field-webform-services.field-type-field-collection {
+  padding-top: 104px;
+}
+
+.header .header-top {
+  position: relative;
+}
+
+.header .header-top .social-menu-wrap {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+
+.header .header-top .social-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header .header-top .social-menu ul img {
+  width: 170px;
+}
+
+.header .header-top .social-menu ul li {
+  transition: opacity .3s;
+}
+
+.header .header-top .social-menu ul li:hover {
+  opacity: .7;
+}

@@ -1,0 +1,37 @@
+.outer-wrapper {
+  min-height: 100%;
+  position: relative;
+  background: #f2f2f2;
+
+  .page-bg-gray & {
+    background: #e8e5e1;
+  }
+
+  .page-bg-white & {
+    background: #fff;
+  }
+}
+
+.content-inner-top {
+  background: #fff;
+}
+
+.content-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner-wrapper {
+  padding-bottom: 222px;
+}
+
+.content-inner {
+  width: $width-inner;
+  margin: 0 auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  .content-bottom {
+    padding-top: 133px;
+  }
+}

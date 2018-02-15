@@ -1,0 +1,14 @@
+name = Parent Pro Mobile Theme
+core = 7.x
+
+stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/custom.css
+
+scripts[] = js/lib/jquery.flexslider.js
+scripts[] = js/lib/jquery.maphilight.js
+scripts[] = js/js.js
+
+regions[content_top] = Content Top
+regions[content] = Content
+regions[content_bottom] = Content Bottom
+regions[footer] = Footer

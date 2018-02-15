@@ -1,0 +1,33 @@
+Index: trunk/sites/all/modules/contrib/webform/includes/webform.webformconditionals.inc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- trunk/sites/all/modules/contrib/webform/includes/webform.webformconditionals.inc	(revision dd6bacb3bfcb29125184d5a98170260a3d3df3c7)
++++ trunk/sites/all/modules/contrib/webform/includes/webform.webformconditionals.inc	(revision )
+@@ -417,9 +417,22 @@
+                   $this->markupMap[$page_num][$target] = $action['argument'];
+                 } 
+                 else {
+-                  $input_values[$target] = isset($input_values[$target]) && is_array($input_values[$target])
+-                                              ? array($action['argument'])
+-                                              : $action['argument'];
++                  if(isset($input_values[$target]) && is_array($input_values[$target])) {
++                    //correct setting multiple checkbox values
++                    if(is_string($action['argument']) && strpos($action['argument'], ',') !==FALSE) {
++                      if(!isset($input_values[$target][0])) {
++                        $keys = explode(',', $action['argument']);
++                        foreach ($keys as $key) {
++                          $input_values[$target][0][$key] = $key;
++                        }
++                      }
++                    } else {
++                      $input_values[$target] = array($action['argument']);
++                    }
++
++                  } else {
++                    $input_values[$target] = $action['argument'];
++                  }
+                   $this->setMap[$page_num][$target] = TRUE;
+                 }
+               }

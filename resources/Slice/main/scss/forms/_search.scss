@@ -1,0 +1,30 @@
+&.form-search {
+  float: right;
+  width: 310px;
+  margin-top: 46px;
+  position: relative;
+
+  .form-item {
+
+    input {
+      border: none;
+      width: 100%;
+      @include input-placeholder(#ccc8c2);
+      padding: 5px 10px 5px 38px;
+    }
+  }
+
+  .form-item, .form-actions {
+    margin: 0;
+  }
+
+  .form-submit {
+    @include oneline-sprite-box($icons, icon-search);
+    border: none;
+    @include text-hide();
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    left: 8px;
+  }
+}

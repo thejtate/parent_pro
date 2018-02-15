@@ -1,0 +1,69 @@
+.btn-wrap {
+  text-align: center;
+  margin-top: 25px;
+
+  &.style-a .btn {
+    margin-top: 25px;
+    color: #68ad45;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: "ubuntu-bold-webfont";
+    padding: 11px 20px 8px 20px;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid #68ad45;
+    text-decoration: none;
+    min-width: 212px;
+    position: relative;
+    float: right;
+
+    &:before {
+      @include pseudo-block($top: 50%, $left: 15px);
+      @include oneline-sprite-box($icons, arr-l);
+      @include transform(translateY(-50%));
+    }
+
+    &:hover {
+      background: #68ad45;
+      color: #fff;
+
+      &:before{
+        @include oneline-sprite($icons, arr-w)
+      }
+    }
+  }
+
+  .form-submit, .btn {
+    background: transparent;
+    text-transform: uppercase;
+    font-family: $ubuntu;
+    @include transition(all .2s);
+    display: inline-block;
+  }
+
+  .form-submit {
+    padding: 10px 26px;
+    border: 1px solid #923f8c;
+    color: #923f8c;
+    font-size: 14px;
+
+    &:hover {
+      background: #923f8c;
+      color: #fff;
+    }
+  }
+
+  .btn {
+    padding: 7px 20px;
+    font-size: 12px;
+    border: 1px solid #b383b1;
+    letter-spacing: 1px;
+    color: #b383b1;
+    text-decoration: none;
+
+    &:hover {
+      background: #b383b1;
+      color: #fff;
+    }
+  }
+}

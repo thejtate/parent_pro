@@ -1,0 +1,204 @@
+&.page-parenting {
+
+  .content-wrapper {
+
+    .top-img figcaption {
+      right: auto;
+      left: 13%;
+      top: 105px;
+    }
+
+    .cols.cols-two.style-a {
+
+      .col-1 {
+        //        width: 50%;
+        width: 100%;
+
+        .col-inner {
+          //          width: 370px;
+          width: 978px;
+          margin: 0 auto;
+          float: none;
+          padding: 0;
+
+          .text {
+            margin-bottom: 30px;
+            border-bottom: 2px dotted #ccc;
+
+            ul {
+              margin: 0;
+              padding: 0;
+
+              li {
+                list-style: none;
+                margin-bottom: 30px;
+
+                display: inline-block;
+                vertical-align: top;
+                width: 400px;
+                margin-right: 70px;
+
+                h4 {
+                  font-size: 23px;
+                  color: #923f8c;
+                  font-family: $robotoslabLight;
+                  margin: 0;
+                }
+
+                p {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+
+          .info {
+
+            h3 {
+              padding: 0 20px;
+              font-size: 27px;
+              color: #68ad45;
+              display: inline-block;
+              font-family: $robotoslabLight;
+              vertical-align: top;
+            }
+
+            img {
+              display: inline-block;
+              vertical-align: top;
+              width: 80px;
+              height: 80px;
+            }
+
+            ul {
+              margin: 0;
+              padding: 0;
+
+              li {
+                list-style: none;
+                position: relative;
+                margin-bottom: 15px;
+                padding-left: 15px;
+
+                &:before {
+                  @include pseudo-block($left: 0, $top: 3px);
+                  border-top: 5px solid transparent;
+                  border-bottom: 5px solid transparent;
+                  border-left: 9px solid #91d96c;
+                }
+
+                a {
+                  text-decoration: none;
+                  color: #923f8c;
+
+                  &:hover {
+                    border-bottom: 1px dotted #923f8c;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .col-2 {
+        display: none;
+        width: 50%;
+
+        .col-bd {
+          background: #e8e5e1;
+          text-align: left;
+
+          .col-item {
+            border-top: 2px dotted #ccc;
+            width: 435px;
+            margin: 0 200px 20px 60px;
+            padding-top: 20px;
+
+            &:first-child {
+              border: none;
+            }
+
+            .item-hd {
+
+              h3 {
+                padding: 0 20px;
+                font-size: 27px;
+                color: #68ad45;
+                display: inline-block;
+                font-family: $robotoslabLight;
+                vertical-align: top;
+              }
+
+              img {
+                display: inline-block;
+                vertical-align: top;
+                width: 80px;
+                height: 80px;
+              }
+            }
+
+            .item-bd {
+
+              .first-col {
+                float: left;
+                width: 50%;
+              }
+
+              .last-col {
+                float: left;
+                width: 50%;
+              }
+
+              ul {
+                margin: 0;
+                padding: 0;
+
+                li {
+                  list-style: none;
+                  position: relative;
+                  margin-bottom: 15px;
+                  padding-left: 15px;
+
+                  &:before {
+                    @include pseudo-block($left: 0, $top: 3px);
+                    border-top: 5px solid transparent;
+                    border-bottom: 5px solid transparent;
+                    border-left: 9px solid #91d96c;
+                  }
+
+                  a {
+                    text-decoration: none;
+                    color: #923f8c;
+
+                    &:hover {
+                      border-bottom: 1px dotted #923f8c;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .col-hd h3 {
+          padding: 0;
+
+          &:before {
+            background: none;
+          }
+        }
+      }
+    }
+
+    .first-col {
+      float: left;
+      width: 50%;
+    }
+
+    .last-col {
+      float: left;
+      width: 50%;
+    }
+  }
+}

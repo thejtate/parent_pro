@@ -1,0 +1,39 @@
+&.page-resources {
+
+  .cols-three {
+
+    .col {
+      padding-top: 35px;
+      padding-bottom: 20000px;
+      margin-bottom: -20000px;
+    }
+
+    .col-1 .col-inner {
+      float: right;
+    }
+
+    .col-2 {
+      background: #f2f2f2;
+
+      .col-inner {
+        width: 100%;
+      }
+    }
+
+    .col-1, .col-3 {
+
+      .col-inner {
+        width: 80%;
+      }
+    }
+
+    .text {
+      line-height: 24px;
+      margin-bottom: 20px;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

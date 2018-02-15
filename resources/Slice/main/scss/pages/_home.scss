@@ -1,0 +1,157 @@
+&.page-home {
+
+  .slider {
+    position: relative;
+    height: 553px;
+    overflow: hidden;
+
+    .slides {
+      @include clear-box;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    .slides li {
+      display: none;
+
+      &:first-child {
+        display: block;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .flex-prev, .flex-next {
+      position: absolute;
+      top: 40%;
+      width: 60px;
+      height: 120px;
+      @include text-hide;
+      z-index: 2;
+    }
+
+    .flex-prev {
+      left: 0;
+      @include oneline-sprite($icons, nav-prev);
+    }
+
+    .flex-next {
+      right: 0;
+      @include oneline-sprite($icons, nav-next);
+    }
+
+    .desc {
+      position: absolute;
+      left: 10%;
+      top: 13%;
+      width: 335px;
+
+      h4 {
+        color: #923f8c;
+        font-size: 43px;
+        margin: 0 0 18px;
+        line-height: 50px;
+        font-weight: normal;
+        font-family: $robotoslabLight;
+      }
+
+      p {
+        color: #68ad45;
+        margin: 0;
+        text-transform: uppercase;
+        font-size: 19px;
+        font-family: $ubuntuBold;
+      }
+    }
+
+    .slide-1 .desc {
+      left: 10%;
+      top: 13%;
+      width: 340px;
+    }
+
+    .slide-2 .desc {
+      left: 61%;
+      top: 13%;
+      width: 350px;
+    }
+
+    .slide-3 .desc {
+      left: 10%;
+      top: 13%;
+      width: 335px;
+    }
+
+    .slide-4 .desc {
+      left: 10%;
+      top: 13%;
+      width: 335px;
+    }
+
+    .slide-5 .desc {
+      right: 10% !important;
+      top: 13%;
+      left: auto;
+      width: 335px;
+    }
+
+    .slide-6 .desc {
+      top: 12%;
+      right: 4% !important;
+      left: auto;
+      width: 335px;
+    }
+  }
+
+  .cols {
+
+    .col-1 {
+
+      .col-hd {
+
+        h3 {
+          padding-left: 114px;
+
+          &:before {
+            @include oneline-sprite-box($icons, search);
+            @include pseudo-block($left: 0, $top: -11px);
+          }
+        }
+      }
+
+      h5 {
+        margin: 0 0 20px;
+        font-weight: normal;
+        font-family: $robotoslabLight;
+        font-size: 21px;
+      }
+
+      .col-bd {
+        background: #f2f2f2;
+      }
+    }
+  }
+
+  .map-wrapper {
+    padding-top: 60px;
+
+    .map {
+      left: 60px;
+    }
+
+    .map-r-title {
+      display: none;
+    }
+  }
+}

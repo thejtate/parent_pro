@@ -1,0 +1,71 @@
+.header {
+  position: relative;
+  background-color: #923f8c;
+  margin-bottom: 7px;
+
+  .img-decor {
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .logo {
+    padding: 6% 23% 6% 6%;
+
+    img {
+      display: block;
+    }
+  }
+}
+
+.header-inner {
+
+  .nav-btn {
+    @include oneline-sprite-box($icons, btn-nav);
+    display: block;
+    position: absolute;
+    right: 5%;
+    top: 56%;
+    margin-top: -11px;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #6e3169;
+    padding: 5%;
+    z-index: 100;
+    overflow: hidden;
+    display: none;
+
+    ul {
+      font-family: $robotoslabLight;
+      margin: 0 auto;
+      padding: 0;
+      width: 320px;
+
+      li {
+        padding-bottom: 8px;
+        display: inline-block;
+        vertical-align: top;
+        background: image-url('bg/dotted-a.png') repeat-x -7px 100%;
+        width: 43%;
+        font-size: 18px;
+        margin-bottom: 15px;
+
+        &:nth-child(even) {
+          margin-left: 37px;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+  }
+}

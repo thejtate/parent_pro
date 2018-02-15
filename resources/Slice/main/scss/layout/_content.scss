@@ -1,0 +1,728 @@
+.content-wrapper {
+
+  h2 {
+    color: #923f8c;
+    font-weight: normal;
+    font-family: $robotoslabLight;
+  }
+
+  .cols {
+    @include clear-box;
+
+    &.cols-one, &.cols-two.style-a {
+
+      .col-1 {
+
+        .col-hd {
+          background: #68ad45;
+        }
+      }
+
+      .col-2 {
+
+        .col-hd {
+          background: #408020;
+
+          h3 {
+            padding-left: 77px;
+
+            &:before {
+              @include oneline-sprite-box($icons, tell);
+              @include pseudo-block($left: 0, $top: -9px);
+            }
+          }
+        }
+
+        .col-bd {
+          text-align: center;
+        }
+
+        .col-inner {
+          width: 337px;
+          padding-left: 41px;
+        }
+
+        .info {
+          font-family: $ubuntuLight;
+          margin-bottom: 27px;
+
+          p {
+            margin: 0;
+            font-size: 15px;
+          }
+
+          span {
+            display: block;
+            font-family: $robotoslabLight;
+            color: #68ad45;
+            font-size: 37px;
+            line-height: 65px;
+          }
+        }
+      }
+
+      .col {
+        float: left;
+
+        .col-hd {
+          height: 100px;
+          color: #fff;
+          @include box-sizing(border-box);
+          padding-top: 22px;
+          font-family: $robotoslabLight;
+
+          h3 {
+            font-weight: normal;
+            font-size: 37px;
+            margin: 0;
+            position: relative;
+          }
+        }
+      }
+    }
+
+    &.cols-one {
+
+      .col {
+        width: 100%;
+      }
+
+      .col-bd {
+        background: #f2f2f2;
+      }
+
+      .col-inner {
+
+        .page-parenting & {
+          width: 978px;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    &.cols-two {
+
+      &.style-a {
+
+        .col-1 {
+          width: 60%;
+
+          .col-inner {
+            width: 642px;
+            padding-right: 54px;
+          }
+        }
+
+        .col-2 {
+          width: 40%;
+        }
+
+        .col-bd {
+          overflow: hidden;
+          padding-top: 50px;
+          padding-bottom: 20000px;
+          margin-bottom: -19958px;
+        }
+      }
+
+      &.style-b {
+
+        .col {
+          width: 50%;
+        }
+
+        .col-1 .col-inner {
+          padding-right: 105px;
+        }
+
+        .col-2 .col-inner {
+          padding-left: 60px;
+          padding-right: 30px;
+        }
+
+        .col-item {
+          margin-bottom: 60px;
+        }
+
+        li {
+          line-height: 26px;
+        }
+      }
+
+      &.style-c {
+
+        .col {
+          width: 50%;
+          @include box-sizing(border-box);
+        }
+
+        .col-1 {
+          padding-right: 20px;
+        }
+
+        .col-2 {
+          padding-left: 20px;
+        }
+
+        h3 {
+          font-size: 24px;
+        }
+
+        h5 {
+          margin-bottom: 30px;
+        }
+
+        strong {
+          font-family: $ubuntuBold;
+          text-transform: uppercase;
+        }
+
+        p {
+          line-height: 24px;
+        }
+      }
+
+      .col-1 .col-inner {
+        float: right;
+      }
+    }
+
+    &.cols-two.style-b, &.cols-three, &.cols-four {
+
+      ul {
+        margin: 0 0 50px;
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 9px;
+        padding-left: 16px;
+        position: relative;
+
+        &:before {
+          @include pseudo-block($left: 0, $top: 3px);
+          border-left: 9px solid #91d96c;
+          border-top: 5px solid transparent;
+          border-bottom: 5px solid transparent;
+        }
+      }
+    }
+
+    &.cols-three, &.cols-four, &.cols-two.style-c {
+
+      h3 {
+        margin: 0;
+        font-weight: normal;
+        font-family: $robotoslabLight;
+      }
+
+      h5 {
+        color: #68ad45;
+        text-transform: uppercase;
+        font-family: $ubuntuBold;
+        letter-spacing: 1px;
+      }
+    }
+
+    &.cols-three.style-a, &.cols-four {
+
+      .col-hd {
+        text-align: center;
+        overflow: hidden;
+
+        img {
+          margin-bottom: 6px;
+        }
+      }
+
+      .col-bd {
+        overflow: hidden;
+      }
+
+      h3 {
+        color: #68ad45;
+      }
+
+      h5 {
+        font-size: 15px;
+        margin: 0 0 20px;
+      }
+
+      li {
+        color: #923f8c;
+      }
+
+      a {
+        color: #923f8c;
+        text-decoration: none;
+      }
+    }
+
+    &.cols-three, &.cols-two {
+
+      &.style-b, &.style-c {
+        padding-top: 35px;
+        @include clearfix;
+        overflow: visible;
+
+        .col-hd {
+          padding-bottom: 13px;
+          border-bottom: 2px dotted #cccccc;
+          margin-bottom: 35px;
+          position: relative;
+        }
+
+        h3 {
+          margin: 0;
+          color: #923f8c;
+        }
+
+        .col-item {
+          margin-bottom: 25px;
+        }
+
+        a {
+          color: #923f8c;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+
+        .link {
+          font-family: $ubuntuBold;
+          text-decoration: none;
+
+          &:hover {
+            color: #808080;
+          }
+        }
+
+        h5 {
+          font-size: 17px;
+        }
+
+        p {
+          margin: 0 0 10px;
+        }
+      }
+    }
+
+    &.cols-three {
+
+      &.style-a {
+
+        .col-1, .col-3 {
+          width: 35%;
+        }
+
+        .col-2 {
+          width: 30%;
+        }
+
+        .col-hd {
+          padding: 0 40px;
+        }
+
+        .col-bd {
+          padding: 25px 40px;
+        }
+
+        a:hover {
+          border-bottom: 1px dotted #923f8c;
+        }
+      }
+
+      &.style-b {
+
+        .col {
+          width: 280px;
+          margin-left: 68px;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+
+        h3 {
+          cursor: pointer;
+          position: relative;
+
+          &:after {
+            @include oneline-sprite-box($icons, icon-info);
+            @include pseudo-block($right: 0, $top: 10px);
+          }
+        }
+
+        h5 {
+          margin: 0 0 10px;
+        }
+
+        p {
+          line-height: 18px;
+        }
+      }
+
+      &.style-c {
+
+        .col {
+          width: 277px;
+          margin-left: 35px;
+
+          &.col-3 {
+            width: 350px;
+          }
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+
+        h5 {
+          margin: 0 0 10px;
+        }
+
+        h3 {
+          font-size: 24px;
+        }
+
+        strong {
+          font-family: $ubuntuBold;
+        }
+
+        p {
+          line-height: 24px;
+        }
+
+        .link {
+          font-family: $ubuntuLight;
+        }
+
+        span.link {
+          color: #923f8c;
+          font-family: $ubuntuLight;
+          display: block;
+
+          a {
+            text-decoration: none;
+            color: #923f8c;
+            position: relative;
+            padding-left: 13px;
+
+            &:before {
+              @include pseudo-block($left: 0, $top: 6px);
+              border-top: 4px solid transparent;
+              border-bottom: 4px solid transparent;
+              border-left: 9px solid #91d96c;
+            }
+          }
+        }
+
+        .col-item table {
+          width: 100%;
+
+          tbody {
+            border: none;
+          }
+
+          tr {
+
+            &:nth-child(odd) {
+              background: #e8e5e1;
+            }
+
+            &:nth-child(even) td {
+              padding: 7px 5px;
+            }
+          }
+
+          td {
+            padding: 2px 5px;
+          }
+        }
+      }
+
+      h3 {
+        font-size: 26px;
+      }
+    }
+
+    &.cols-four {
+
+      .col {
+        width: 25%;
+      }
+
+      .col-bd {
+        padding: 40px 0 0;
+
+        .col-inner {
+          padding-left: 30px;
+        }
+      }
+
+      .col-hd, .col-bd {
+        width: 222px;
+        margin: 0 auto;
+      }
+
+      h3 {
+        font-size: 24px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .col {
+      float: left;
+
+      .col-inner {
+        @include box-sizing(border-box);
+      }
+    }
+  }
+
+  .map-wrapper {
+    min-height: 294px;
+    position: relative;
+    @include box-sizing(border-box);
+
+    .map {
+      text-align: right;
+      position: absolute;
+      top: 0;
+    }
+
+    .desc {
+      width: 210px;
+      position: relative;
+      @include box-sizing(border-box);
+
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+        display: inline-block;
+        vertical-align: top;
+        width: 100px;
+      }
+
+      a {
+        color: #808080;
+        text-decoration: none;
+      }
+    }
+
+    .desc-item {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    h4 {
+      font-size: 31px;
+      border-bottom: #ccc dotted 2px;
+      padding-bottom: 15px;
+      margin: 0 0 20px;
+      font-weight: normal;
+      font-family: $robotoslabLight;
+    }
+
+    .table {
+      width: 100%;
+    }
+
+    tbody {
+      border: none;
+    }
+
+    th {
+      font-weight: normal;
+      font-family: $ubuntuBold;
+      letter-spacing: 2px;
+      color: #cfccc8;
+      border: none;
+      padding-bottom: 6px;
+    }
+
+    td {
+      font-size: 16px;
+
+      &:first-child {
+        width: 115px;
+        @include box-sizing(border-box);
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .top-img {
+    position: relative;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    figcaption {
+      position: absolute;
+      top: 7%;
+      right: 105px;
+      width: 390px;
+
+      .page-services & {
+        width: 340px;
+        right: 130px;
+      }
+
+      .page-activities & {
+        right: auto;
+        left: 13%;
+        top: 56px;
+      }
+    }
+
+    h2 {
+      font-size: 43px;
+      margin: 0 0 24px;
+    }
+
+    .desc {
+      color: #68ad45;
+      text-transform: uppercase;
+      font-size: 19px;
+      line-height: 30px;
+      letter-spacing: 1px;
+      font-family: $titilliumtext22lxbold;
+    }
+
+    .link {
+      margin-top: 25px;
+      color: #923f8c;
+      font-size: 14px;
+      text-transform: uppercase;
+      font-family: $ubuntuBold;
+      padding: 11px 40px 8px 20px;
+      display: inline-block;
+      vertical-align: top;
+      border: 1px solid #923f8c;
+      text-decoration: none;
+      position: relative;
+
+      &:before {
+        @include oneline-sprite-box($icons, arrow);
+        @include pseudo-block($top: 50%, $right: 25px);
+        margin-top: -5px;
+      }
+    }
+  }
+
+  .content-top {
+    background: #e8e5e1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+
+    .content-top-inner {
+      @include clear-box;
+      width: $width-inner;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 37px;
+      float: left;
+      font-weight: normal;
+      font-family: $robotoslabLight;
+      margin: 37px 0;
+    }
+
+    .btn {
+      display: block;
+    }
+
+    .navigation {
+      float: right;
+      padding-top: 25px;
+
+      .btn-map {
+        margin-top: 25px;
+        color: #68ad45;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-family: $ubuntuBold;
+        padding: 11px 40px 8px 20px;
+        display: inline-block;
+        vertical-align: top;
+        border: 1px solid #68ad45;
+        text-decoration: none;
+        position: absolute;
+        cursor: default;
+        right: 124px;
+        min-width: 230px;
+
+        &:before {
+          @include oneline-sprite-box($icons, arrow-a);
+          @include pseudo-block($top: 50%, $right: 25px);
+          margin-top: -5px;
+        }
+      }
+    }
+  }
+}
+
+.dd-block {
+  position: absolute;
+  background: #e8e5e1;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  display: none;
+  min-width: $width;
+
+  .dd-block-inner {
+    width: $width-inner;
+    margin: 0 auto;
+    padding: 35px 0;
+  }
+
+  .arrow-icon {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 19px solid #e8e5e1;
+  }
+
+  p {
+    line-height: 26px;
+  }
+
+  .link {
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 15px;
+    color: #923f8c;
+    font-family: $ubuntuBold;
+    text-decoration: none;
+
+    &:after {
+      @include oneline-sprite-box($icons, icon-link);
+      @include pseudo-block($right: -30px, $top: -3px);
+    }
+  }
+}

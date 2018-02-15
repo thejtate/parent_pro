@@ -1,0 +1,20 @@
+name        = Parent pro site
+description = Custom main theme
+core        = 7.x
+
+stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/custom.css
+
+scripts[] = js/lib/combobox.js
+scripts[] = js/lib/jquery.columnizer.js
+scripts[] = js/lib/jquery.flexslider.js
+scripts[] = js/lib/jquery.maphilight.js
+scripts[] = js/lib/jquery.uniform.js
+scripts[] = js/js.js
+scripts[] = js/custom.js
+
+regions[header] = Header
+regions[content] = Content
+regions[column_left] = Column left
+regions[column_right] = Column right
+regions[footer] = Footer

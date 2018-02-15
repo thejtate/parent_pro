@@ -1,0 +1,109 @@
+&.form-services {
+  padding-top: 30px;
+  border-top: 2px dotted #cdcdcd;
+
+  .page-services-questionaire & {
+    border-top: none;
+    padding: 0;
+
+    fieldset {
+
+      & > .form-item {
+        margin-bottom: 40px;
+
+       & > label {
+          margin-bottom: 30px;
+        }
+      }
+
+      .form-type-radio, .form-type-checkbox {
+        margin-right: 50px;
+      }
+
+      legend {
+        margin-bottom: 26px;
+      }
+
+      .form-type-radio, .form-type-checkbox {
+        margin-bottom: 20px;
+      }
+
+      &:nth-child(1) {
+
+        .form-type-radio, .form-type-checkbox {
+          min-width: 225px;
+        }
+      }
+
+      &:nth-child(2) {
+
+        .form-type-radio, .form-type-checkbox {
+          display: block;
+        }
+      }
+    }
+  }
+
+  label, legend {
+    font-size: 19px;
+    font-family: $ubuntuMedium;
+    font-weight: normal;
+  }
+
+  label, .form-select, .form-radio, .form-type-radio, .form-type-checkbox, .form-checkbox {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .form-text {
+    font-size: 19px;
+    border: 3px solid #e0ddda;
+    background: none;
+    padding: 6px 10px;
+    width: 300px;
+    font-family: $ubuntu;
+
+    @include input-placeholder($color: #d1ccc7);
+  }
+
+  .form-item {
+    margin-right: 50px;
+  }
+
+  .form-type-textfield {
+    display: inline-block;
+    margin-right: 60px;
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+
+  .form-type-radio, .form-type-checkbox {
+    margin-right: 20px;
+
+    label {
+      font-weight: normal;
+      font-family: $ubuntuLight;
+      margin-left: 10px;
+    }
+
+    .checker {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .form-type-select {
+
+    .form-select {
+      visibility: hidden;
+    }
+
+    label {
+      font-family: $ubuntuMedium;
+      margin-right: 20px;
+    }
+  }
+}

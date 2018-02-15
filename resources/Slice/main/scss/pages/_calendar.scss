@@ -1,0 +1,213 @@
+&.page-calendar {
+
+  h1 {
+    color: #68ad45;
+  }
+
+  h3 {
+    font-weight: normal;
+    font-size: 25px;
+    color: #923f8c;
+    margin: 0 0 10px;
+    font-family: $robotoslabLight;
+  }
+
+  .calendar-outer-wrapper {
+    @include clearfix();
+  }
+
+  .calendar-wrapper {
+    width: 310px;
+    float: right;
+    margin-left: 30px;
+
+    table {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .date-nav-wrapper {
+      text-align: center;
+      color: #fff;
+      font-family: $robotoslabLight;
+      font-size: 30px;
+      background: #68ad45;
+      position: relative;
+      padding: 15px 60px;
+      @include box-sizing(border-box);
+
+      .date-nav {
+        margin: 0;
+        min-height: 0;
+        position: static;
+        padding: 0;
+      }
+
+      h3 {
+        font-size: 30px !important;
+        color: #fff;
+        margin: 0;
+
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
+      }
+
+      .pager, li {
+        margin: 0;
+        padding: 0;
+      }
+
+      .pager a {
+        display: block;
+        margin: 0;
+        @include text-hide();
+      }
+
+      li {
+        @include text-hide();
+      }
+
+      .date-prev, .date-next {
+        position: absolute;
+        top: 50%;
+        margin-top: -20px;
+        background: none;
+        border-radius: 0;
+      }
+
+      .date-prev {
+        left: 14px;
+        right: auto;
+
+        a {
+          @include oneline-sprite-box($icons, calendar-prev);
+
+          &:hover {
+            @include oneline-sprite($icons, calendar-prev-hover);
+          }
+        }
+      }
+
+      .date-next {
+        right: 14px;
+        left: auto;
+
+        a {
+          @include oneline-sprite-box($icons, calendar-next);
+
+          &:hover {
+            @include oneline-sprite($icons, calendar-next-hover);
+          }
+        }
+      }
+    }
+
+    thead th {
+      color: #73ba50;
+      background: #408020;
+      text-transform: uppercase;
+      text-align: center;
+      border: none;
+      font-size: 13px;
+      font-family: $ubuntuMedium;
+      font-weight: normal;
+      padding: 10px 0;
+    }
+
+    tbody {
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      td {
+        padding: 5px 7px 17px;
+        font-family: $ubuntuLight;
+        font-size: 20px;
+        background: #e8e5e1;
+        border-left: 1px solid #f2f2f2;
+        border-top: 1px solid #f2f2f2;
+        width: 45px;
+        height: 48px;
+        @include box-sizing(border-box);
+
+        &:first-child {
+          border-left: none;
+        }
+      }
+
+      .calendar-empty {
+        display: none;
+      }
+    }
+
+    .single-day {
+      display: none;
+    }
+
+    .today {
+      border-color: #f2f2f2 !important;
+      background: #d6d2cb;
+    }
+
+    .has-events {
+      padding: 0;
+      @include box-shadow(inset 0 0 0 1px #68ad45);
+
+      &.past {
+        @include box-shadow(inset 0 0 0 1px #d6d2cb);
+        background: #d6d2cb;
+
+        a {
+          color: #333;
+        }
+      }
+
+      a {
+        padding: 5px 7px 17px;
+        display: block;
+        text-decoration: none;
+        color: #68ad45;
+      }
+    }
+  }
+
+  .calendar-text {
+    font-size: 17px;
+    overflow: hidden;
+
+    p {
+      margin: 0 0 10px;
+
+      strong {
+        font-weight: normal;
+        font-family: $ubuntuBold;
+      }
+    }
+  }
+
+  .calendar-item {
+    padding-bottom: 25px;
+    margin-bottom: 35px;
+    border-bottom: 2px dotted #d0d0d0;
+    @include clearfix();
+
+    .item-day {
+      float: left;
+      background: #6aac4b;
+      font-family: $robotoslabLight;
+      color: #fff;
+      font-size: 27px;
+      text-align: center;
+      padding: 7px 0;
+      width: 50px;
+      margin-right: 25px;
+    }
+
+    .text {
+      overflow: hidden;
+    }
+  }
+}

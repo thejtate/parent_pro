@@ -1,0 +1,130 @@
+&.page-about-us {
+
+  .content-wrapper {
+
+    h1 {
+      color: #68ad45;
+      font-size: 30px;
+      font-family: $robotoslabLight;
+      margin: 0 0 50px;
+      text-align: center;
+      font-weight: normal;
+    }
+
+    .programs-list {
+      text-align: center;
+
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+        width: 200px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 55px 60px;
+      }
+
+      img {
+        margin-bottom: 10px;
+      }
+
+      h6 {
+        margin: 0 0 8px;
+        color: #68ad45;
+        font-size: 21px;
+        font-weight: normal;
+        font-family: $robotoslabLight;
+      }
+
+      p {
+        font-family: $ubuntuLightItalic;
+        font-size: 14px;
+        margin: 0;
+      }
+    }
+  }
+
+  .video-wrapper {
+    @include clear-box;
+
+    .text, .video {
+      float: left;
+    }
+
+    .text {
+      width: 360px;
+      font-size: 15px;
+      line-height: 26px;
+      margin-right: 53px;
+
+      &:first-letter {
+        font-size: 24px;
+        font-family: $ubuntuBold;
+      }
+
+      p {
+        margin: 0 0 15px;
+      }
+    }
+
+    .video {
+      background: #f2f2f2;
+      padding: 10px;
+
+      img {
+        display: block;
+      }
+    }
+  }
+
+  .cols {
+
+    .col-1 {
+
+      .col-hd {
+
+        h3 {
+          text-align: center;
+        }
+      }
+
+      .text {
+        line-height: 26px;
+        margin-bottom: 25px;
+
+        p {
+          margin: 0;
+        }
+      }
+
+      blockquote {
+        margin: 0 0 25px;
+        font-family: $robotoslabLight;
+        font-size: 16px;
+        line-height: 24px;
+        color: #68ad45;
+
+        p {
+          margin-bottom: 15px;
+        }
+      }
+
+      .author {
+        text-transform: uppercase;
+        font-size: 13px;
+        font-family: $ubuntu;
+        text-align: right;
+      }
+    }
+
+    .col-2 {
+
+      .col-bd {
+        background: #e0dcd5;
+      }
+    }
+  }
+}

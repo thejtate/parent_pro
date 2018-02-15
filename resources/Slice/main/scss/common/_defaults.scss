@@ -1,0 +1,51 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  height: 100%;
+  font-size: 15px;
+  min-width: $width;
+  color: #808080;
+  font-family: $ubuntuLight;
+}
+
+.clearfix {
+  *zoom: 1;
+
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.img-decor img {
+  display: block;
+  width: 100%;
+  height: 12px;
+}
+
+#back-to-top {
+  @include oneline-sprite-box($icons, arrow-top);
+  position: fixed;
+  right: 0;
+  display: none;
+  top: 50%;
+  margin-top: -17px;
+  cursor: pointer;
+}

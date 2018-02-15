@@ -1,0 +1,40 @@
+Index: trunk/sites/all/modules/contrib/webform/js/webform.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- trunk/sites/all/modules/contrib/webform/js/webform.js	(revision a67cbbc146a6d42291fa97d3710e45027389a559)
++++ trunk/sites/all/modules/contrib/webform/js/webform.js	(revision )
+@@ -199,12 +199,18 @@
+             }
+             break;
+           case 'set':
++
++              //console.log(actionResult);
+             var isLocked = targetLocked[action['target']];
+             var $texts = $target.find("input:text,textarea,input[type='email']");
+             var $selects = $target.find('select,select option,input:radio,input:checkbox');
+             var $markups = $target.filter('.webform-component-markup');
+             if (actionResult) {
++              console.log(action);
+               var multiple = $.map(action['argument'].split(','), $.trim);
++              console.log($selects);
++              console.log(multiple);
++
+               $selects.webformVal(multiple);
+               $texts.val([action['argument']]);
+               // A special case is made for markup. It is sanitized with filter_xss_admin on the server.
+@@ -626,7 +632,12 @@
+         $this.webformProp('selected', on ? value : false);
+       }
+       else {
++        if($this.attr('type') == 'checkbox') {
++          $this.prop('checked', on);
++        } else {
+-        $this.val(on ? [value] : false);
++          $this.val(on ? [value] : false);
++        }
++
+       }
+     });
+     return this;

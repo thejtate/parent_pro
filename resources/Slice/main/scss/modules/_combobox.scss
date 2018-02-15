@@ -1,0 +1,97 @@
+.combo-wrapper, .combo-list {
+  @include box-sizing(border-box);
+  font-size: 14px;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.combo-wrapper {
+  vertical-align: middle;
+  line-height: 32px;
+  outline: none;
+  cursor: pointer;
+  @include clear-box;
+  position: relative;
+  letter-spacing: 2px;
+  font-family: $ubuntuBold;
+
+
+  .page-calendar & {
+    border: 1px solid #ccc8c2;
+    color: #f2f2f2;
+    background: #ccc8c2;
+
+    &.combo-wrapper-active {
+      background: #ccc8c2;
+
+
+      .combo-button:before {
+        border-top: none;
+        border-bottom: 10px solid #e8e5e1;
+      }
+    }
+  }
+
+  .page-services & {
+    background: #ccc8c2;
+    color: #e8e5e1;
+
+    &.combo-wrapper-active {
+
+      .combo-button:before {
+        border-top: none;
+        border-bottom: 10px solid #f2f2f2;
+      }
+    }
+  }
+
+  .combo-button {
+    float: right;
+    @include text-hide;
+    position: relative;
+
+    &:before {
+      @include pseudo-block($left: 0, $top: 10px);
+      border-top: 10px solid #e8e5e1;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+
+      .page-calendar & {
+        border-top: 10px solid #e8e5e1;
+      }
+
+      .page-services & {
+        border-top: 10px solid #f2f2f2;
+      }
+    }
+  }
+
+  .combo-selected {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @include box-sizing(border-box);
+    padding: 0 0 0 20px;
+    word-wrap: normal;
+    overflow: hidden;
+    margin-left: -3px;
+  }
+}
+
+.combo-list {
+  background: #e0dcd5;
+  margin: 0;
+  padding: 7px 0;
+  color: #808080;
+  border-top: none;
+  overflow: hidden;
+
+  li {
+    padding: 8px 30px;
+    list-style: none;
+    cursor: pointer;
+
+    &:hover, &.combo-item-active {
+      background: #e8e5e1;
+    }
+  }
+}

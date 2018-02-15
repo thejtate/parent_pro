@@ -1,0 +1,115 @@
+.calendar-mobile-no-results {
+  margin: 20px;
+}
+
+.page-calendar .content-wrapper .view-filters {
+  display: none;
+}
+
+.page-calendar .content-wrapper .locations-list {
+  background: #e8e5e1;
+  padding: 10px 0;
+  display: none;
+  height: 202px;
+  overflow-y: scroll;
+}
+
+.page-calendar .content-wrapper .locations-list .first-col {
+  float: left;
+  width: 50%;
+}
+
+.page-calendar .content-wrapper .locations-list .last-col {
+  float: left;
+  width: 50%;
+}
+
+.page-calendar .content-wrapper .locations-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.page-calendar .content-wrapper .locations-list ul li {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding: 0 40px;
+}
+
+.page-calendar .content-wrapper .locations-list ul li a {
+  color: #923f8c;
+  text-decoration: none;
+}
+
+.page-calendar .content-wrapper .content-inner .block-2 .event .event-date span span {
+  display: inline;
+}
+
+.node-type-activities .content .content {
+  color: #68ad45;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.node-type-activities .content-title h1 {
+  float: none;
+}
+
+.node-type-activities .content .content p {
+  text-align: center;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.node-type-activities .tabs-wrapper {
+  margin-bottom: 40px;
+}
+
+.node-type-activities .tabs-wrapper h6 {
+  font-size: 14px;
+  padding: 20px 10px 0 10px;
+}
+
+.node-type-activities .item-list h3 {
+  text-align: center;
+}
+
+.field-name-field-activities-top-image {
+  display: none;
+}
+
+.node-type-activities .item-list ul {
+  width: 260px;
+  margin: 0 auto;
+}
+
+.front .content-wrapper .cols.cols-two.style-a {
+  width: 100%;
+}
+
+.page-calendar .content-wrapper .content-title h1 {
+  float: none;
+}
+
+.page-calendar .content-wrapper .content-title .link.style-a {
+  float: none;
+  background: #ccc;
+  padding: 9px 25px 9px 20px;
+}
+
+.content-wrapper .content-title .link.style-a:before {
+  top: 13px;
+  right: 7px;
+}
+
+.page-calendar .content-wrapper .content-title .link.style-a.link-calendar {
+  margin-right: 7px;
+}
+
+.page-calendar .content-title-inner {
+  text-align: center;
+}
+
+
+

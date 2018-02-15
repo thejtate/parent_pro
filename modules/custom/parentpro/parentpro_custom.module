@@ -1,0 +1,340 @@
+<?php
+
+/**
+ * @file
+ * Custom site functionality
+ */
+
+define('WEBFORM_CALL_US_NID', 8);
+define('WEBFORM_SERVICES_SOUTHEAST_NID', 54);
+define('WEBFORM_SERVICES_MAP_NID', 51);
+define('WEBFORM_SERVICES_SOUTHWEST_NID', 108);
+define('WEBFORM_SERVICES_NORTHEAST_NID', 110);
+define('WEBFORM_SERVICES_SOUTH_CENTRAL_NID', 112);
+define('WEBFORM_SERVICES_CENTRAL_NID', 114);
+define('WEBFORM_SERVICES_NORTHWEST_NID', 115);
+define('SERVICES_QUESTIONAIRE_WEBFORM_NID', 1550);
+define('SERVICES_QUESTIONAIRE_NEW_WEBFORM_NID', 2837);
+define('SERVICES_QUESTIONAIRE_PATH', 'counties-new');
+
+module_load_include("inc", "parentpro_custom", "parentpro_custom.maps");
+
+/**
+ * Implements hook_form_alter().
+ */
+function parentpro_custom_form_alter(&$form, &$form_state, $form_id) {
+
+  switch ($form_id) {
+
+    case 'webform_services_node_form':
+        $form['#attached']['css'][] = drupal_get_path('module', 'parentpro_custom') . '/css/table_fix.css';
+      break;
+    case 'webform_client_form_' . WEBFORM_CALL_US_NID:
+      $form['actions']['#prefix'] = '<div class="btn-wrap">';
+      $form['actions']['#suffix'] = '</div>';
+      foreach (element_children($form['submitted']) as $key) {
+        $title = $form['submitted'][$key]['#title'];
+        _parentpro_form_add_one_wrapper($form['submitted'][$key], array(
+          'form-item',
+          'form-type-textfield'
+        ));
+        $form['submitted'][$key]['#attributes'] = array('placeholder' => $title);
+      }
+      break;
+
+    case 'webform_client_form_' . WEBFORM_SERVICES_SOUTHEAST_NID:
+    case 'webform_client_form_' . WEBFORM_SERVICES_SOUTHWEST_NID:
+    case 'webform_client_form_' . WEBFORM_SERVICES_NORTHEAST_NID:
+    case 'webform_client_form_' . WEBFORM_SERVICES_SOUTH_CENTRAL_NID:
+    case 'webform_client_form_' . WEBFORM_SERVICES_CENTRAL_NID:
+    case 'webform_client_form_' . WEBFORM_SERVICES_NORTHWEST_NID:
+
+      $form['submitted']['age']['#options']['_none'] = 'None';
+      $form['actions']['#prefix'] = '<div class="btn-wrap">';
+      $form['actions']['#suffix'] = '</div>';
+      break;
+
+    case 'webform_client_form_' . SERVICES_QUESTIONAIRE_WEBFORM_NID:
+    case 'webform_client_form_' . SERVICES_QUESTIONAIRE_NEW_WEBFORM_NID:
+      $form['#attributes']['novalidate'] = TRUE;
+      if(!empty($form['submitted']['rank_the_level_of_stress_in_your_home2'])) {
+        $form['submitted']['rank_the_level_of_stress_in_your_home2']['#title'] = str_replace('2', '', $form['submitted']['rank_the_level_of_stress_in_your_home2']['#title']);
+        $form['submitted']['rank_the_level_of_stress_in_your_home2']['#description'] = '';
+      }
+      break;
+  }
+}
+
+
+
+function parentpro_custom_form_views_exposed_form_alter(&$form, &$form_state, $form_id){
+  switch ($form_id) {
+    case ('views_exposed_form'):
+      $form['#after_build'][] = '_sort_alphabetically';
+    break; 
+  }
+}
+
+function _sort_alphabetically($form, $form_state) {
+        foreach ($form_state['view']->filter as $field => $filter) {
+            if ($filter->options['exposed']  && $filter->options['id'] == 'field_county_region_tid' ) {
+                $field_id = $form['#info']["filter-field_county_region_tid"]['value'];
+                asort($form[$field_id]['#options']);
+            }
+        }
+        return $form;
+}
+
+
+
+
+/**
+ * Add wrappers with classes to form items
+ * @param $form
+ * @param $field
+ * @param array $classes
+ */
+function _parentpro_form_add_wrapper(&$element, $classes = array(), $type = array(
+  'form-item',
+  'form-type-textfield'
+), $removeTitle = FALSE) {
+  if (!empty($element)) {
+    if ($removeTitle) {
+      $classes[] = "hide-title";
+    }
+
+    $element['#prefix'] = '<div class="' . implode(" ", $classes) . '"><div class="' . implode(" ", $type) . '">';
+    $element['#suffix'] = '</div></div>';
+  }
+}
+
+/**
+ * Add wrapper with classes to form items
+ * @param $element
+ * @param array $classes
+ */
+function _parentpro_form_add_one_wrapper(&$element, $classes = array()) {
+  if (!empty($element)) {
+    $element['#prefix'] = '<div class="' . implode(" ", $classes) . '">';
+    $element['#suffix'] = '</div>';
+  }
+}
+
+/**
+ * Implement hook_form_FORM_ID_alter
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+function parentpro_custom_form_resources_items_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['field_resources_items_source'][LANGUAGE_NONE]['#after_build'][] = 'field_resources_items_source_after_build';
+}
+
+function field_resources_items_source_after_build($form, &$form_state) {
+  foreach ($form as $k => $v) {
+    if (isset($v['#entity_type']) && $v['#entity_type'] == 'field_collection_item') {
+
+      $form[$k]['field_resources_items_files']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_resources_items_source[und][' . $k . '][field_resources_items_type][und]"]' => array('value' => t('file'))
+        ),
+      );
+
+      $form[$k]['field_resources_items_link']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_resources_items_source[und][' . $k . '][field_resources_items_type][und]"]' => array('value' => t('link'))
+        ),
+      );
+
+    }
+  }
+  return $form;
+}
+
+/**
+ * Implementation of hook_views_query_alter().
+ */
+function parentpro_custom_views_query_alter(&$view, &$query) {
+
+  if ($view->name == 'events_calendar') {
+    //All months
+    $month_all = _parentpro_custom_check_months_all();
+    $day = _parentpro_custom_check_day();
+    if ($month_all) {
+      $field = "DATE_FORMAT(field_data_field_event_date.field_event_date_value, '%Y-%m') >= :field_data_field_event_date_field_event_date_value1 AND DATE_FORMAT(field_data_field_event_date.field_event_date_value, '%Y-%m') <= :field_data_field_event_date_field_event_date_value2";
+      _parentpro_custom_unset_query_condition($query, $field);
+    }
+    if ($day) {
+      $field = 'field_data_field_event_city.field_event_city_tid';
+      _parentpro_custom_unset_query_condition($query, $field);
+    }
+  }
+}
+
+/**
+ * Unset query condition.
+ *
+ * @param $query
+ * @param $field
+ */
+function _parentpro_custom_unset_query_condition(&$query, $field) {
+  foreach ($query->where as &$condition_group) {
+    foreach ($condition_group ['conditions'] as $key => &$condition) {
+      if ($condition ['field'] == $field) {
+        unset($condition_group ['conditions'][$key]);
+      }
+    }
+  }
+}
+
+/**
+ * Check if all months selected.
+ * @return bool
+ */
+function _parentpro_custom_check_months_all() {
+  $url_query = drupal_get_query_parameters($_GET, array('q'));
+  $url_query['month'] = isset($url_query['month']) ? $url_query['month'] : '';
+  return !empty($url_query['month']);
+}
+
+/**
+ * Check if day selected in calendar new.
+ *
+ * @return mixed
+ */
+function _parentpro_custom_check_day() {
+  $arg_year = arg(1);
+  $date_parse = date_parse_from_format("Y-m-d", $arg_year);
+  return $date_parse['day'];
+}
+
+/**
+ * Theme helper.
+ *
+ * @param array $element Render array
+ * @param string $classes separated by space
+ * @param string $tag
+ */
+function parentpro_wrap_item(&$element, $classes, $tag = 'div') {
+  if (!empty($element)) {
+    $element['#prefix'] = '<' . $tag . (!empty($classes) ? ' class="' . $classes . '">' : '>') . (array_key_exists('#prefix', $element) ? $element['#prefix'] : '');
+    $element['#suffix'] = (array_key_exists('#suffix', $element) ? $element['#suffix'] : '') . '</'. $tag . '>';
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function parentpro_custom_menu() {
+  $items = array();
+
+  $items['admin/config/parentpro'] = array(
+    'title' => t('Parentpro'),
+    'position' => 'right',
+    'weight' => -5,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  $items['admin/config/parentpro/custom'] = array(
+    'title' => t('Custom Settings'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('parentpro_custom_admin_settings'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'parentpro_custom.admin.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function parentpro_custom_theme($existing, $type, $theme, $path) {
+  $module_path = drupal_get_path('module', 'parentpro_custom');
+  return array(
+    'parentpro_custom__social_links' => array(
+      'template' => 'parentpro-custom--social-links',
+      'arguments' => array('data' => NULL),
+      'path' => $module_path . '/templates',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function parentpro_custom_block_info() {
+  $blocks = array();
+  $blocks['parentpro_custom_social_block'] = array(
+    'info' => t('Social block'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function parentpro_custom_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'parentpro_custom_social_block':
+      $block['subject'] = '';
+      $block['content'] = _parentpro_custom_social_block_content();
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Social block.
+ *
+ * @return null|string
+ */
+function _parentpro_custom_social_block_content() {
+  $socials = _parentpro_custom_admin_settings_map();
+  $output = theme("parentpro_custom__social_links", array('data' => $socials));
+  return $output;
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function parentpro_custom_preprocess_parentpro_custom__social_links(&$vars) {
+  $items = array();
+
+  foreach ($vars['data'] as $key => $data) {
+    $url = variable_get($key, "");
+    $img = '';
+
+    if (!empty($data['img'])) {
+      $img = theme('image', array('path' =>  $data['img']));
+    }
+
+    if (!empty($url)) {
+      $items[] = array(
+        'data' => l($img, $url, array('attributes' => array('target' => '_blank'), 'html' => TRUE)),
+        'class' => array($data['class'])
+      );
+    }
+  }
+  $vars['social_menu'] = theme('item_list', array('items' => $items));
+}
+
+
+/**
+ * Implements template_preprocess_page().
+ */
+function parentpro_custom_preprocess_page(&$vars) {
+  $social_block = block_load('parentpro_custom', 'parentpro_custom_social_block');
+  $social_block_ra = _block_get_renderable_array(_block_render_blocks(array($social_block)));
+  if (!empty($social_block_ra)) {
+    $vars['social_block'] = drupal_render($social_block_ra);
+  }
+}

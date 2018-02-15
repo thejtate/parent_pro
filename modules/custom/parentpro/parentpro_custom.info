@@ -1,0 +1,8 @@
+name = ParentPro custom
+description = Custom ParentPro module.
+core = 7.x
+package = custom
+
+files[] = parentpro_custom.admin.inc
+
+configure = admin/config/parentpro/custom

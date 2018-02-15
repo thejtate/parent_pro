@@ -1,0 +1,17 @@
+&.form-call {
+
+  .form-text {
+    background: #f2f2f2;
+    color: #bfbdba;
+    border: none;
+    font-family: $ubuntuLightItalic;
+    padding: 6px 10px;
+    font-size: 15px;
+    width: 250px;
+    @include input-placeholder(#aaaaaa);
+  }
+
+  .not-label label {
+    display: none;
+  }
+}
